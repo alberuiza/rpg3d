@@ -14,12 +14,13 @@ public class PlayerMovement : MonoBehaviour
 
     CharacterController character;
     Animator animator;
-    
+    Rigidbody rigidbody3D;
 
     private void Start()
     {
         character = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        rigidbody3D = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -39,12 +40,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Movimiento de traslación
-            character.Move(
+        /*    character.Move(
             Vector3.forward * leftJoystick.GetComponent<MobileJoystickController>().pointPosition.y * speed * Time.deltaTime
             +
             Vector3.right * leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x * speed * Time.deltaTime
             );
-
+        */
 
         // Movimiento de rotación
         Vector3 desde = new Vector3(0.0f, 0.0f, 1.0f);
@@ -56,6 +57,16 @@ public class PlayerMovement : MonoBehaviour
         float angulo = Vector3.SignedAngle(desde, hacia, Vector3.up);
 
         transform.eulerAngles = Vector3.up * Mathf.LerpAngle(transform.eulerAngles.y, angulo, smoothTime);
+    }
+
+    private void FixedUpdate()
+    {
+        rigidbody3D.MovePosition(
+            transform.position
+            +
+            Vector3.forward * leftJoystick.GetComponent<MobileJoystickController>().pointPosition.y * speed * Time.deltaTime
+            +
+            Vector3.right * leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x * speed * Time.deltaTime);
     }
 
 }
