@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject leftJoystick;
     [SerializeField] GameObject rightJoystick;
 
+    [SerializeField] float offset;
+
     CharacterController character;
     Animator animator;
     
@@ -47,9 +49,9 @@ public class PlayerMovement : MonoBehaviour
         // Movimiento de rotación
         Vector3 desde = new Vector3(0.0f, 0.0f, 1.0f);
         Vector3 hacia = new Vector3(
-            rightJoystick.GetComponent<MobileJoystickController>().pointPosition.x,
+            leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x,
             0.0f,
-            rightJoystick.GetComponent<MobileJoystickController>().pointPosition.y
+            leftJoystick.GetComponent<MobileJoystickController>().pointPosition.y
             );
         float angulo = Vector3.SignedAngle(desde, hacia, Vector3.up);
 
