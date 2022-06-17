@@ -11,18 +11,33 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject rightJoystick;
 
     CharacterController character;
+    Animator animator;
     
 
     private void Start()
     {
         character = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        Debug.Log(leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x);
+        //Debug.Log(leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x);
+        // Detectamos que nos estamos moviendo
+        if (leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x != 0 ||
+            leftJoystick.GetComponent<MobileJoystickController>().pointPosition.y != 0)
+        {
+            Debug.Log("true");
+            animator.SetBool("walking", true);
+        }
+        else
+        {
+            Debug.Log("false");
+            animator.SetBool("walking", false);
+        }
+
         // Movimiento de traslación
-        character.Move(
+            character.Move(
             Vector3.forward * leftJoystick.GetComponent<MobileJoystickController>().pointPosition.y * speed * Time.deltaTime
             +
             Vector3.right * leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x * speed * Time.deltaTime
