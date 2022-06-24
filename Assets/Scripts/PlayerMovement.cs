@@ -30,12 +30,12 @@ public class PlayerMovement : MonoBehaviour
         if (leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x != 0 ||
             leftJoystick.GetComponent<MobileJoystickController>().pointPosition.y != 0)
         {
-            Debug.Log("true");
+            //Debug.Log("true");
             animator.SetBool("walking", true);
         }
         else
         {
-            Debug.Log("false");
+            //Debug.Log("false");
             animator.SetBool("walking", false);
         }
 
