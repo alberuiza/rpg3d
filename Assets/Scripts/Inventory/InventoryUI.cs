@@ -20,7 +20,8 @@ public class InventoryUI : MonoBehaviour
 		Inventory.instance.onItemChangedCallback += UpdateUI;
 		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
 	}
-	
+
+	// Función para actualizar la UI del inventario cada vez que se añade o borra un elemento
 	void UpdateUI()
 	{
 		for(int i=0; i  < slots.Length; i++)

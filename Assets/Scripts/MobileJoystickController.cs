@@ -12,7 +12,7 @@ public class MobileJoystickController : MonoBehaviour, IDragHandler, IEndDragHan
 
     public void OnDrag(PointerEventData eventData)
     {
-        //Debug.Log("OnDrag");
+        Debug.Log("OnDrag");
 
         pointPosition = new Vector2(
             (eventData.position.x - background.position.x ) / ( background.rect.size.x / 2 - stick.rect.size.x / 2),
@@ -20,7 +20,7 @@ public class MobileJoystickController : MonoBehaviour, IDragHandler, IEndDragHan
             );
         //if (pointPosition.magnitude > 1.0f) pointPosition.Normalize();
         pointPosition = pointPosition.magnitude > 1.0f ? pointPosition.normalized : pointPosition;
-        //Debug.Log("x; " + pointPosition.x + " y: " + pointPosition.y   );
+        Debug.Log("x; " + pointPosition.x + " y: " + pointPosition.y   );
 
         stick.transform.position = new Vector2(
             pointPosition.x * (background.rect.size.x / 2 - stick.rect.size.x / 2) + background.position.x,
@@ -30,7 +30,7 @@ public class MobileJoystickController : MonoBehaviour, IDragHandler, IEndDragHan
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //Debug.Log("OnEndDrag");
+        Debug.Log("OnEndDrag");
         pointPosition = new Vector2(0.0f, 0.0f);
         stick.transform.position = background.position;
     }

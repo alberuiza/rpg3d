@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        
+
         //Debug.Log(leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x);
         // Detectamos que nos estamos moviendo
         if (leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x != 0 ||
@@ -61,12 +63,36 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        /*
         rigidbody3D.MovePosition(
             transform.position
             +
             Vector3.forward * leftJoystick.GetComponent<MobileJoystickController>().pointPosition.y * speed * Time.deltaTime
             +
             Vector3.right * leftJoystick.GetComponent<MobileJoystickController>().pointPosition.x * speed * Time.deltaTime);
+        */
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        rigidbody3D.MovePosition(
+            transform.position
+            +
+            Vector3.forward * v * speed * Time.deltaTime
+            +
+            Vector3.right * h * speed * Time.deltaTime);
+
+        //Debug.Log("h: " + h);
+
+        if (h != 0.0f ||
+            v != 0.0f)
+        {
+            //Debug.Log("true");
+            animator.SetBool("walking", true);
+        }
+        else
+        {
+            //Debug.Log("false");
+            animator.SetBool("walking", false);
+        }
     }
 
 }
